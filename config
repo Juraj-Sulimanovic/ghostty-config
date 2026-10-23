@@ -1,0 +1,49 @@
+
+# Ghostty config, ported from ~/.wezterm.lua. tmux does all splitting/windows/sessions.
+
+# ── Always run inside tmux ────────────────────────────────────────────────
+command = /Users/jurajsulimanovic/.config/tmux/scripts/tmux-start
+# tmux keeps sessions alive, so closing a window never loses anything: skip the prompt
+confirm-close-surface = false
+
+# ── Font ──────────────────────────────────────────────────────────────────
+font-family = JetBrainsMono Nerd Font
+font-size = 24
+font-feature = -calt
+font-feature = -clig
+font-feature = -liga
+
+# ── Colours: catppuccin mocha, matching the tmux theme ────────────────────
+theme = Catppuccin Mocha
+# overrides on top of the theme
+background = #000000
+
+# ── Window ────────────────────────────────────────────────────────────────
+macos-titlebar-style = hidden
+window-width = 120
+window-height = 28
+window-padding-x = 4
+window-padding-y = 2
+
+# ── Keys ──────────────────────────────────────────────────────────────────
+# Cmd+k / Ctrl+Shift+k -> clear the pane and its scrollback (tmux maps this key to User0)
+keybind = cmd+k=text:\x1b[99;9~
+keybind = ctrl+shift+k=text:\x1b[99;9~
+
+# Ctrl+1..5 -> tmux window 1..5 (CSI-u encoding, tmux has extended-keys on)
+keybind = ctrl+one=text:\x1b[49;5u
+keybind = ctrl+two=text:\x1b[50;5u
+keybind = ctrl+three=text:\x1b[51;5u
+keybind = ctrl+four=text:\x1b[52;5u
+keybind = ctrl+five=text:\x1b[53;5u
+
+# Cmd+Left -> start of line. Ctrl+a twice: first is the tmux prefix, second passes it through.
+keybind = cmd+left=text:\x01\x01
+# Cmd+Right -> end of line (Ctrl+e)
+keybind = cmd+right=text:\x05
+# Cmd+Backspace -> delete to start of line (Ctrl+u)
+keybind = cmd+backspace=text:\x15
+
+# Ghostty's own splits are off: tmux owns panes (Ctrl+a | and Ctrl+a -)
+keybind = cmd+d=unbind
+keybind = cmd+shift+d=unbind
